@@ -1,6 +1,6 @@
 # PolicyMVP
 
-Search-first web app for monitoring government protocols. FastAPI + Jinja + HTMX, OpenSearch for indexing/search. No Docker required for local dev.
+Search-first web app for monitoring government protocols. FastAPI + Jinja + HTMX, OpenSearch for indexing/search.
 
 ## Quick start
 
@@ -65,5 +65,6 @@ python scripts/ingest_bundestag_daily.py
 # or replace bundestag with eu
 ```
 
+Frontend with highlighting:
 ![PolicyMVP](image.png)
 
