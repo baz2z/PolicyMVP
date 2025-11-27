@@ -9,7 +9,7 @@ from .settings import settings
 from .api.routes import router as api_router
 from .services.search_service import ping
 
-app = FastAPI(title="PolicyRadarVibe", debug=settings.app_env != "production")
+app = FastAPI(title="PolicyMVP", debug=settings.app_env != "production")
 
 # Static files and templates
 app.mount("/static", StaticFiles(directory="app/static"), name="static")

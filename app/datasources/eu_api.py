@@ -68,7 +68,7 @@ def list_work_ids(kind: str, term: Optional[int] = None, page_limit: int = 5000,
     pages = 0
     session = requests.Session()
     session.headers.update({
-        "User-Agent": "PolicyRadarVibe-EU-API/0.1",
+        "User-Agent": "PolicyMVP-EU-API/0.1",
         "Accept": "application/ld+json, application/json;q=0.9, */*;q=0.1",
     })
     while True:
@@ -128,7 +128,7 @@ def get_work_details(work_id: str, lang: str = "en") -> WorkDetails:
     params = {"format": "application/ld+json", "language": lang}
     session = requests.Session()
     session.headers.update({
-        "User-Agent": "PolicyRadarVibe-EU-API/0.1",
+        "User-Agent": "PolicyMVP-EU-API/0.1",
         "Accept": "application/ld+json, application/json;q=0.9, */*;q=0.1",
     })
     resp = session.get(url, params=params, timeout=_http_timeout())
