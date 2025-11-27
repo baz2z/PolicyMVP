@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="layout">
+  <aside class="filters" id="filters">
+    <form id="filter-form" hx-post="/search" hx-target="#results" hx-include="#search-form" hx-indicator="#loading">
+      <h3>Filter</h3>
+      <div>
+        <label>Quelle</label>
+        <div>
+          <label><input type="checkbox" name="source" value="bundestag" checked> Bundestag</label>
+          <br>
+          <label><input type="checkbox" name="source" value="eu"> EU</label>
+        </div>
+      </div>
+      <div>
+        <label>Typ</label>
+        <div>
+          <label><input type="checkbox" name="doc_type" value="plenarprotokoll"> Plenarprotokoll</label><br>
+          <label><input type="checkbox" name="doc_type" value="drucksache"> Drucksache</label><br>
+          <label><input type="checkbox" name="doc_type" value="A"> A</label><br>
+          <label><input type="checkbox" name="doc_type" value="TA"> TA</label><br>
+          <label><input type="checkbox" name="doc_type" value="E"> E</label><br>
+          <label><input type="checkbox" name="doc_type" value="CRE"> CRE</label>
+        </div>
+      </div>
+      <div>
+        <label>Zeitraum</label>
+        <div class="date-range">
+          <input type="date" name="date_from" />
+          <span>bis</span>
+          <input type="date" name="date_to" />
+        </div>
+      </div>
+      <input type="hidden" name="page" value="1" />
+      <button type="submit">Anwenden</button>
+    </form>
+  </aside>
+
+  <section class="results">
+    <form id="search-form" class="search" hx-post="/search" hx-target="#results" hx-include="#filter-form" hx-indicator="#loading">
+      <input type="text" name="search_terms" placeholder="Suche…" />
+      <input type="hidden" name="page" value="1" />
+      <button type="submit">Suchen</button>
+      <span id="loading" class="htmx-indicator">Laden…</span>
+    </form>
+
+    <div id="results">
+      {% include 'partials/results.html' %}
+    </div>
+  </section>
+</section>
+{% endblock %}

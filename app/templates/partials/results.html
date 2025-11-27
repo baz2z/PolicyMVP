@@ -1,0 +1,29 @@
+{% if result is defined %}
+  <div class="summary">
+    <strong>{{ result.total }}</strong> Treffer
+  </div>
+  {% for h in result.hits %}
+  <article class="hit">
+    <h3><a href="{{ h.url }}" target="_blank" rel="noopener">{{ h.title }}</a></h3>
+    <div class="meta">{{ h.source }} · {{ h.publication_date }}</div>
+    {% if h.snippet %}<p class="snippet">{{ h.snippet | safe }}</p>{% endif %}
+  </article>
+  {% else %}
+  <p>Keine Ergebnisse. Probieren Sie andere Suchbegriffe oder Filter.</p>
+  {% endfor %}
+
+  {% if result.total > 0 %}
+  <nav class="pagination">
+    {% set prev_page = result.page - 1 %}
+    {% set next_page = result.page + 1 %}
+    {% if result.page > 1 %}
+      <button hx-post="/search" hx-include="#search-form,#filter-form" hx-vals='{"page": {{ prev_page }} }' hx-target="#results">Zurück</button>
+    {% endif %}
+    {% if (result.page * result.size) < result.total %}
+      <button hx-post="/search" hx-include="#search-form,#filter-form" hx-vals='{"page": {{ next_page }} }' hx-target="#results">Weiter</button>
+    {% endif %}
+  </nav>
+  {% endif %}
+{% else %}
+  <p>Geben Sie einen Suchbegriff ein oder wählen Sie Filter aus.</p>
+{% endif %}
